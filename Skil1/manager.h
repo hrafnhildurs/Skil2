@@ -21,9 +21,10 @@ public:
     void alphabeticSortDes(QSqlDatabase db);
     void birthYearSort(QSqlDatabase db);
     void asInserted(QSqlDatabase db);
-    void deleteName(const char doc[], vector<string> tempVec);
+    void deleteName(QSqlDatabase db);
     string readSearchWord();
-    void search(const char doc[], string letters);
+    void search(QSqlDatabase db, string searchWord);
+    //void search(const char doc[], string letters);
     //void DocString (const char doc[], vector<string> stringVec);
 private:
     person pers;

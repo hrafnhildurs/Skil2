@@ -78,7 +78,7 @@ void Interface::sortMenu() {
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = sortSwitch();
-    }while(number != '4');
+    }while(number != '5');
     cout << "\n\n";
 }
 
@@ -143,12 +143,12 @@ void Interface::search() {
     string searchWord;
     searchWord = manager.readSearchWord();
     searchHeader();
-    manager.search("out.txt", searchWord);
+    manager.search(manager.readFromFile(),searchWord);
 }
 
 // Calls the deletePerson function in Manager class
 void Interface::deletePerson() {
-    //manager.deleteName("out.txt", manager.readFromFile());
+    manager.deleteName(manager.readFromFile());
 }
 
 // Prints out the database header when list is displayed

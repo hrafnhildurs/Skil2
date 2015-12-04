@@ -16,20 +16,6 @@ struct prog
     int deathYear;
 };
 
-// Reads from database file (out.txt) into a vector
-/*void Manager::DocString (const char doc[], vector<string> stringVec)
-{
-    ifstream document;
-    document.open(doc);
-    string temp;
-
-    while(getline(document, temp, ';'))
-    {
-        stringVec.push_back(temp);
-    }
-
-    document.close();
-}*/
 
 // Helper function that returns a vector from database file
 QSqlDatabase Manager::readFromFile() {
@@ -37,7 +23,7 @@ QSqlDatabase Manager::readFromFile() {
     prog ramers;
     vector<prog> cnames;
 
-    QString dblocation = "C:\\Users\\IceVinking\\Documents\\Skole\\githubSkole\\Database\\persons.sqlite";
+    QString dblocation = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers.sqlite";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(dblocation);
     bool db_ok = db.open();
@@ -61,7 +47,7 @@ void Manager::asInserted(QSqlDatabase db) {
 
     if(db_ok)
     {
-      QSqlQuery query1("SELECT * FROM programers");
+      QSqlQuery query1("SELECT * FROM programmers");
       while (query1.next())
       {
           //int id = query1.value(0).toInt();
@@ -82,7 +68,7 @@ void Manager::alphabeticSortAsc(QSqlDatabase db) {
 
     if(db_ok)
     {
-      QSqlQuery query1("SELECT * FROM programers ORDER BY name ASC");
+      QSqlQuery query1("SELECT * FROM programmers ORDER BY name ASC");
       while (query1.next())
       {
           //int id = query1.value(0).toInt();
@@ -91,7 +77,7 @@ void Manager::alphabeticSortAsc(QSqlDatabase db) {
           int birthYear = query1.value(3).toInt();
           int deathYear = query1.value(4).toInt();
 
-          //cout << name << ", " << sex << ", " << birthYear << ", " << deathYear << endl;
+          cout << name << ", " << sex << ", " << birthYear << ", " << deathYear << endl;
       }
     }
 }
@@ -102,7 +88,7 @@ void Manager::alphabeticSortDes(QSqlDatabase db) {
 
     if(db_ok)
     {
-      QSqlQuery query1("SELECT * FROM programers ORDER BY name DESC");
+      QSqlQuery query1("SELECT * FROM programmers ORDER BY name DESC");
       while (query1.next())
       {
           //int id = query1.value(0).toInt();
@@ -121,7 +107,7 @@ void Manager::birthYearSort(QSqlDatabase db) {
 
     if(db_ok)
     {
-      QSqlQuery query1("SELECT * FROM programers ORDER BY birthYear ASC ");
+      QSqlQuery query1("SELECT * FROM programmers ORDER BY birthYear ASC ");
       while (query1.next())
       {
           //int id = query1.value(0).toInt();
@@ -144,54 +130,58 @@ string Manager::readSearchWord() {
 }
 
 // Search function
-void Manager::search(const char doc[], string letters) {
-    ifstream in(doc);
-    string line;
-
-    if(in.is_open())
+void Manager::search(QSqlDatabase db, string searchWord) {
+    bool db_ok = db.open();
+    QSqlQuery query1;
+    QString qname(searchWord.c_str());
+    if(db_ok)
     {
-        int found = 0;
-        cout << "\n";
-        while (getline(in, line)) {
-        if (line.find(letters) != string::npos) {
-            cout << "   " << line << endl;
-            found++;
-            }
-        }
-        if (found == 0)
-           cout << "   " << letters << " not found" << endl;
+
+      query1.prepare("SELECT * FROM programmers WHERE name LIKE '%' || ? || '%' ");
+      query1.addBindValue(qname);
+      query1.exec();
+
+      while (query1.next())
+      {
+          //int id = query1.value(0).toInt();
+          string name = query1.value(1).toString().toStdString();
+          string sex = query1.value(2).toString().toStdString();
+          int birthYear = query1.value(3).toInt();
+          int deathYear = query1.value(4).toInt();
+
+          cout << name << ", " << sex << ", " << birthYear << ", " << deathYear << endl;
+      }
     }
 }
 
 // Delete name from database
-/*void Manager::deleteName(const char doc[], vector<string> tempVec){
-    string name;
-    bool found = false;
+void Manager::deleteName(QSqlDatabase db){
+    bool db_ok = db.open();
+    QSqlQuery query1;
+    string del;
 
-    cout << "\n";
-    cout << setw(68) << "Enter the name you want to delete: ";
-    cin >> name;
+    cout << "Enter a full name of the person you want to delete: ";
+    cin >> ws;
+    getline(cin,del);
 
-    for(unsigned int i = 0; i < tempVec.size(); ++i)
+    QString qname(del.c_str());
+    if(db_ok)
     {
-        if(tempVec[i].substr(0, name.length()) == name)  //searching for the name in the vector
-        {
-            found = true;
-            tempVec.erase(tempVec.begin() + i);           //deleting the name from the vector
-            cout << setw(54) << "Name has been erased!"<< endl;
-            i = 0;                                  //reseting the search
-        }
+
+      query1.prepare("DELETE FROM programmers WHERE name = ?");
+      query1.addBindValue(qname);
+      query1.exec();
+
+      while (query1.next())
+      {
+          //int id = query1.value(0).toInt();
+          string name = query1.value(1).toString().toStdString();
+          string sex = query1.value(2).toString().toStdString();
+          int birthYear = query1.value(3).toInt();
+          int deathYear = query1.value(4).toInt();
+
+          cout << name << ", " << sex << ", " << birthYear << ", " << deathYear << endl;
+      }
     }
 
-    if(!found)
-        cout << setw(60) << "Name not found in database." << endl;
-*/
-
-   // ofstream outs(doc/*, ios::out | ios::trunc*/);             //printing a new list from the vec to the file
-                                                            //were the name has benn deleted
-/*    for(vector<string>::const_iterator newlist = tempVec.begin(); newlist != tempVec.end(); newlist++)
-    {
-        outs << *newlist << endl;
-    }
-    outs.close();
-}*/
+}

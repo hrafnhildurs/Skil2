@@ -32,7 +32,7 @@ istream &operator >> (istream& ins, person& a) {
 
     ofstream outFile;
 
-    QString dblocation = "C:\\Users\\IceVinking\\Documents\\Skole\\githubSkole\\Database\\persons.sqlite";
+    QString dblocation = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers.sqlite";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(dblocation);
     bool db_ok = db.open();
@@ -44,34 +44,60 @@ istream &operator >> (istream& ins, person& a) {
         cout << "Connection failed" << endl;
         //return 1;
     }
+    char ans;
+    cout << "Is the person alive? (y/n) ";
+    cin >> ans;
 
     string name = a.name;
     string sex = a.sex;
     int born = a.birth_year;
     int died = a.death_year;
+    if(ans == 'y')
+    {
+        cout << "Name: ";
+        ins >> ws;
+        getline(ins, name);
+        cout << "Sex: ";
+        getline(ins, sex);
+        cout << "Birth Year: ";
+        ins >> born;
 
-    cout << "Name: ";
-    ins >> ws;
-    getline(ins, name);
-    cout << "Sex: ";
-    getline(ins, sex);
-    cout << "Birth Year: ";
-    ins >> born;
-    cout << "Death Year: ";
-    ins >> died;
+        QString qname(name.c_str());
+        QString qsex(sex.c_str());
 
-    QString qname(name.c_str());
-    QString qsex(sex.c_str());
+        QSqlQuery query;
 
-    QSqlQuery query;
+        query.prepare("INSERT INTO programmers VALUES(NULL, ?, ?, ?, NULL)");
+        query.addBindValue(qname);
+        query.addBindValue(qsex);
+        query.addBindValue(born);
+        query.exec();
+       }
 
-    query.prepare("INSERT INTO programers VALUES(NULL, ?, ?, ?, ?)");
-    query.addBindValue(qname);
-    query.addBindValue(qsex);
-    query.addBindValue(born);
-    query.addBindValue(died);
-    query.exec();
+    else if(ans ==  'n')
+    {
+        cout << "Name: ";
+        ins >> ws;
+        getline(ins, name);
+        cout << "Sex: ";
+        getline(ins, sex);
+        cout << "Birth Year: ";
+        ins >> born;
+        cout << "Death Year: ";
+        ins >> died;
 
+        QString qname(name.c_str());
+        QString qsex(sex.c_str());
+
+        QSqlQuery query;
+
+        query.prepare("INSERT INTO programmers VALUES(NULL, ?, ?, ?, ?)");
+        query.addBindValue(qname);
+        query.addBindValue(qsex);
+        query.addBindValue(born);
+        query.addBindValue(died);
+        query.exec();
+    }
     /*outFile.open("out.txt", ofstream::app);
     if(outFile.fail())
     {

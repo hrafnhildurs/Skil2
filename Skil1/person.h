@@ -13,7 +13,6 @@ protected:
     string sex;
     int birth_year;
     int death_year;
-    const string DATA_FILE_NAME = "out.txt";
 public:
     person();
     person(string& n, string& s, int& b, int& d);
