@@ -1,3 +1,2 @@
-# Skil2
-Verklengt námskeið 1
-Vika 2
+# Verklegt-namskeid-1
+Verklegt námskeið 1
