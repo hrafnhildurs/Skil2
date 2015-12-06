@@ -13,16 +13,17 @@ void Interface::start() {
         cout << setw(48) << "Menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << setw(53) << "1.  Input new person" << endl;
-        cout << setw(57) << "2.  View list of persons" << endl;
-        cout << setw(59) << "3.  View list of computers" << endl;
-        cout << setw(64) << "4.  Delete person from database" << endl;
-        cout << setw(43) << "5.  Search" << endl;
-        cout << setw(42) << "6.  Exit " << endl;
+        cout << setw(54) << "2.  Input new omputer" << endl;
+        cout << setw(57) << "3.  View list of persons" << endl;
+        cout << setw(59) << "4.  View list of computers" << endl;
+        cout << setw(64) << "5.  Delete person from database" << endl;
+        cout << setw(43) << "6.  Search" << endl;
+        cout << setw(42) << "7.  Exit " << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = indexSwitch();
-    }while(number != '6');
+    }while(number != '7');
 }
 
 // Takes input from user and calls appropriate functions in Manager class
@@ -36,23 +37,27 @@ char Interface::indexSwitch() {
             return '1';
             break;
         case '2':
-            sortMenu();
+            addComputer();
             return '2';
             break;
         case '3':
-            computerSortMenu();
+            sortMenu();
             return '3';
             break;
         case '4':
-            deletePerson();
+            computerSortMenu();
             return '4';
             break;
         case '5':
-            search();
+            deletePerson();
             return '5';
             break;
         case '6':
+            search();
             return '6';
+            break;
+        case '7':
+            return '7';
             break;
     default:
             cout << "   Invalid input." << endl;
@@ -65,7 +70,9 @@ char Interface::indexSwitch() {
 void Interface::addPerson() {
     manager.addPerson();
 }
-
+void Interface::addComputer() {
+    manager.addComputer();
+}
 // Displayes the sorting menu and loops while input != 3
 void Interface::sortMenu() {
     char number = 0;

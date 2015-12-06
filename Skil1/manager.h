@@ -9,6 +9,7 @@
 #include <cstring>
 #include <iomanip>
 #include "person.h"
+#include "computer.h"
 #include <QtSql>
 
 class Manager
@@ -27,10 +28,12 @@ public:
     void computerSortAsc(QSqlDatabase db);
     void computerSortDesc(QSqlDatabase db);
     void computerSortYear(QSqlDatabase db);
+    void addComputer();
     //void search(const char doc[], string letters);
     //void DocString (const char doc[], vector<string> stringVec);
 private:
     person pers;
+    computer com;
 };
 
 #endif // MANAGER_H

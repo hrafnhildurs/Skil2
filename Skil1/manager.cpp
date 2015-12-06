@@ -6,6 +6,9 @@ Manager::Manager() {}
 void Manager::addPerson() {
     cin >> pers;
 }
+void Manager::addComputer() {
+    cin >> com;
+}
 
 struct prog
 {

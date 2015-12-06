@@ -26,6 +26,7 @@ private:
     void computerSortYear();
     void computerSortMenu();
     char computerSortSwitch();
+    void addComputer();
 };
 
 #endif // INTERFACE_H
