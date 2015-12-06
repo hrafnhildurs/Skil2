@@ -14,14 +14,15 @@ void Interface::start() {
         cout << "   ======================================================================================" << endl;
         cout << setw(53) << "1.  Input new person" << endl;
         cout << setw(57) << "2.  View list of persons" << endl;
-        cout << setw(64) << "3.  Delete person from database" << endl;
-        cout << setw(43) << "4.  Search" << endl;
-        cout << setw(42) << "5.  Exit " << endl;
+        cout << setw(59) << "3.  View list of computers" << endl;
+        cout << setw(64) << "4.  Delete person from database" << endl;
+        cout << setw(43) << "5.  Search" << endl;
+        cout << setw(42) << "6.  Exit " << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = indexSwitch();
-    }while(number != '5');
+    }while(number != '6');
 }
 
 // Takes input from user and calls appropriate functions in Manager class
@@ -39,15 +40,19 @@ char Interface::indexSwitch() {
             return '2';
             break;
         case '3':
-            deletePerson();
+            computerSortMenu();
             return '3';
             break;
         case '4':
-            search();
+            deletePerson();
             return '4';
             break;
         case '5':
+            search();
             return '5';
+            break;
+        case '6':
+            return '6';
             break;
     default:
             cout << "   Invalid input." << endl;
@@ -136,6 +141,61 @@ void Interface::sortBirthYearAsc() {
 void Interface::asInserted() {
     databaseHeader();
     manager.asInserted(manager.readFromFile());
+}
+void Interface::computerSortAsc() {
+    manager.computerSortAsc(manager.readFromFile());
+}
+void Interface::computerSortDesc() {
+    manager.computerSortDesc(manager.readFromFile());
+}
+void Interface::computerSortYear() {
+    manager.computerSortYear(manager.readFromFile());
+}
+void Interface::computerSortMenu() {
+    char number = 0;
+    do
+    {
+        cout << "\n\n";
+        cout << setw(52) << "Sorting menu" << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << setw(59) << "1.  Ascending alphabetic sort" << endl;
+        cout << setw(60) << "2.  Descending alphabetic sort" << endl;
+        cout << setw(52) << "3.  Sort by year built" << endl;
+        cout << setw(49) << "4.  Exit sort menu " << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << "\n";
+        cout << setw(55) << "Enter your selection: ";
+        number = computerSortSwitch();
+    }while(number != '4');
+    cout << "\n\n";
+}
+char Interface::computerSortSwitch() {
+    char number;
+
+
+    cin >> number;
+    switch(number)
+    {
+        case '1':
+            computerSortAsc();
+            return '1';
+            break;
+        case '2':
+            computerSortDesc();
+            return '2';
+            break;
+        case '3':
+            computerSortYear();
+            return '3';
+            break;
+        case '4':
+            return '4';
+            break;
+        default:
+            cout << "   Invalid input.";
+            return '0';
+            break;
+        }
 }
 
 // Calls the search function in Manager class

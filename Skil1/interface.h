@@ -21,6 +21,11 @@ private:
     void searchHeader();
     void search();
     void deletePerson();
+    void computerSortAsc();
+    void computerSortDesc();
+    void computerSortYear();
+    void computerSortMenu();
+    char computerSortSwitch();
 };
 
 #endif // INTERFACE_H

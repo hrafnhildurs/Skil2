@@ -22,7 +22,7 @@ computer::computer(string& cn, int& cy, string& ct, string& cb){
 
 istream &operator >> (istream& ins, computer& b) {
 
-    QString dblocation = "C:\\Users\\hivSteini\\Desktop\\Verklegt1\\Verklegt-namskeid-1\\Skil2\\Skil1\\persons.sqlite";
+    QString dblocation = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers.sqlite";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(dblocation);
     bool db_ok = db.open();

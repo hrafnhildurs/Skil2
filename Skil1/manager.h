@@ -24,6 +24,9 @@ public:
     void deleteName(QSqlDatabase db);
     string readSearchWord();
     void search(QSqlDatabase db, string searchWord);
+    void computerSortAsc(QSqlDatabase db);
+    void computerSortDesc(QSqlDatabase db);
+    void computerSortYear(QSqlDatabase db);
     //void search(const char doc[], string letters);
     //void DocString (const char doc[], vector<string> stringVec);
 private:

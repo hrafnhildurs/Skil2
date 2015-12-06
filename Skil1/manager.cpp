@@ -185,3 +185,57 @@ void Manager::deleteName(QSqlDatabase db){
     }
 
 }
+void Manager::computerSortAsc(QSqlDatabase db) {
+    bool db_ok = db.open();
+
+    if(db_ok)
+    {
+      QSqlQuery query1("SELECT * FROM computers ORDER BY name ASC");
+      while (query1.next())
+      {
+          //int id = query1.value(0).toInt();
+          string name = query1.value(1).toString().toStdString();
+          string type = query1.value(2).toString().toStdString();
+          int year = query1.value(3).toInt();
+          string built = query1.value(4).toString().toStdString();
+
+          cout << name << ", " << type << ", " << year << ", " << built << endl;
+      }
+    }
+}
+void Manager::computerSortDesc(QSqlDatabase db) {
+    bool db_ok = db.open();
+
+    if(db_ok)
+    {
+      QSqlQuery query1("SELECT * FROM computers ORDER BY name DESC");
+      while (query1.next())
+      {
+          //int id = query1.value(0).toInt();
+          string name = query1.value(1).toString().toStdString();
+          string type = query1.value(2).toString().toStdString();
+          int year = query1.value(3).toInt();
+          string built = query1.value(4).toString().toStdString();
+
+          cout << name << ", " << type << ", " << year << ", " << built << endl;
+      }
+    }
+}
+void Manager::computerSortYear(QSqlDatabase db) {
+    bool db_ok = db.open();
+
+    if(db_ok)
+    {
+      QSqlQuery query1("SELECT * FROM computers ORDER BY year ASC");
+      while (query1.next())
+      {
+          //int id = query1.value(0).toInt();
+          string name = query1.value(1).toString().toStdString();
+          string type = query1.value(2).toString().toStdString();
+          int year = query1.value(3).toInt();
+          string built = query1.value(4).toString().toStdString();
+
+          cout << name << ", " << type << ", " << year << ", " << built << endl;
+      }
+    }
+}
