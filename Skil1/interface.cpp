@@ -13,7 +13,7 @@ void Interface::start() {
         cout << setw(48) << "Menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << setw(53) << "1.  Input new person" << endl;
-        cout << setw(54) << "2.  Input new omputer" << endl;
+        cout << setw(55) << "2.  Input new computer" << endl;
         cout << setw(57) << "3.  View list of persons" << endl;
         cout << setw(59) << "4.  View list of computers" << endl;
         cout << setw(64) << "5.  Delete person from database" << endl;
