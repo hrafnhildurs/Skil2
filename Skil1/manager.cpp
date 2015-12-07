@@ -43,6 +43,10 @@ vector<person> Manager::search(string searchWord) {
 void Manager::deleteName(string name){
     db.deleteName(name);
 }
+// Delete computer from database
+void Manager::deleteComputer(string name){
+    db.deleteComputer(name);
+}
 
 vector<computer> Manager::computerSortAsc() {
     return db.cSortAsc();

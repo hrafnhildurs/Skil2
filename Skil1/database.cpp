@@ -106,6 +106,9 @@ vector<person> Database::search(string searchWord) {
 void Database::deleteName(string name) {
     deleteName(name, db_ok);
 }
+void Database::deleteComputer(string name) {
+    deleteComputer(name, db_ok);
+}
 
 void Database::deleteName(string name, bool db_ok) {
     if(db_ok) {
@@ -113,6 +116,16 @@ void Database::deleteName(string name, bool db_ok) {
 
         QSqlQuery query;
         query.prepare("DELETE FROM programmers WHERE name = ?");
+        query.addBindValue(nameToDel);
+        query.exec();
+    }
+}
+void Database::deleteComputer(string name, bool db_ok) {
+    if(db_ok) {
+        QString nameToDel(name.c_str());
+
+        QSqlQuery query;
+        query.prepare("DELETE FROM computers WHERE name = ?");
         query.addBindValue(nameToDel);
         query.exec();
     }

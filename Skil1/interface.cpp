@@ -12,18 +12,16 @@ void Interface::start() {
         cout << "\n\n";
         cout << setw(48) << "Menu" << endl;
         cout << "   ======================================================================================" << endl;
-        cout << setw(53) << "1.  Input new person" << endl;
-        cout << setw(55) << "2.  Input new computer" << endl;
-        cout << setw(57) << "3.  View list of persons" << endl;
-        cout << setw(59) << "4.  View list of computers" << endl;
-        cout << setw(64) << "5.  Delete person from database" << endl;
-        cout << setw(43) << "6.  Search" << endl;
-        cout << setw(42) << "7.  Exit " << endl;
+        cout << setw(56) << "1.  Input into database" << endl;
+        cout << setw(58) << "2.  View list in database" << endl;
+        cout << setw(57) << "3.  Delete from database" << endl;
+        cout << setw(43) << "4.  Search" << endl;
+        cout << setw(42) << "5.  Exit " << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = indexSwitch();
-    }while(number != '7');
+    }while(number != '5');
 }
 
 // Takes input from user and calls appropriate functions in Manager class
@@ -33,31 +31,23 @@ char Interface::indexSwitch() {
     switch(number)
     {
         case '1':
-            addPerson();
+            inputMenu();
             return '1';
             break;
         case '2':
-            addComputer();
+            viewMenu();
             return '2';
             break;
         case '3':
-            sortMenu();
+            deleteMenu();
             return '3';
             break;
         case '4':
-            computerSortMenu();
+            search();
             return '4';
             break;
         case '5':
-            deletePerson();
             return '5';
-            break;
-        case '6':
-            search();
-            return '6';
-            break;
-        case '7':
-            return '7';
             break;
     default:
             cout << "   Invalid input." << endl;
@@ -288,6 +278,14 @@ void Interface::deletePerson() {
     getline(cin, del);
     manager.deleteName(del);
 }
+// Calls the deleteComputer function in Manager class
+void Interface::deleteComputer() {
+    string del;
+    cout << "Enter a full name of the computer you want to delete: ";
+    cin >> ws;
+    getline(cin, del);
+    manager.deleteComputer(del);
+}
 
 // Prints out the database header when list is displayed
 void Interface::databaseHeader()
@@ -329,4 +327,124 @@ void Interface::writeOutComVector(vector<computer> computer) {
                 computer[i].returnComType() << ", " <<
                 computer[i].returnComBuilt() << endl;
     }
+}
+void Interface::inputMenu() {
+    char number = 0;
+    do
+    {
+        cout << "\n\n";
+        cout << setw(52) << "Input menu" << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << setw(53) << "1.  Input new person" << endl;
+        cout << setw(55) << "2.  Input new computer" << endl;
+        cout << setw(53) << "3.  Exit input menu " << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << "\n";
+        cout << setw(55) << "Enter your selection: ";
+        number = inputSwitch();
+    }while(number != '3');
+    cout << "\n\n";
+}
+char Interface::inputSwitch() {
+    char number;
+    cin >> number;
+
+    switch(number)
+    {
+        case '1':
+            addPerson();
+            return '1';
+            break;
+        case '2':
+            addComputer();
+            return '2';
+            break;
+        case '3':
+            return '3';
+            break;
+        default:
+            cout << "   Invalid input.";
+            return '0';
+            break;
+        }
+}
+void Interface::viewMenu() {
+    char number = 0;
+    do
+    {
+        cout << "\n\n";
+        cout << setw(52) << "View menu" << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << setw(57) << "1.  View list of persons" << endl;
+        cout << setw(59) << "2.  View list of computers" << endl;
+        cout << setw(52) << "3.  Exit view menu " << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << "\n";
+        cout << setw(55) << "Enter your selection: ";
+        number = viewSwitch();
+    }while(number != '3');
+    cout << "\n\n";
+}
+char Interface::viewSwitch() {
+    char number;
+    cin >> number;
+
+    switch(number)
+    {
+        case '1':
+            sortMenu();
+            return '1';
+            break;
+        case '2':
+            computerSortMenu();
+            return '2';
+            break;
+        case '3':
+            return '3';
+            break;
+        default:
+            cout << "   Invalid input.";
+            return '0';
+            break;
+        }
+}
+void Interface::deleteMenu() {
+    char number = 0;
+    do
+    {
+        cout << "\n\n";
+        cout << setw(55) << "Delete menu" << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << setw(64) << "1.  Delete person from database" << endl;
+        cout << setw(66) << "2.  Delete computer from database" << endl;
+        cout << setw(54) << "3.  Exit delete menu " << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << "\n";
+        cout << setw(55) << "Enter your selection: ";
+        number = deleteSwitch();
+    }while(number != '3');
+    cout << "\n\n";
+}
+char Interface::deleteSwitch() {
+    char number;
+    cin >> number;
+
+    switch(number)
+    {
+        case '1':
+            deletePerson();
+            return '1';
+            break;
+        case '2':
+            deleteComputer();
+            return '2';
+            break;
+        case '3':
+            return '3';
+            break;
+        default:
+            cout << "   Invalid input.";
+            return '0';
+            break;
+        }
 }

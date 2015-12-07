@@ -33,17 +33,19 @@ public:
     vector<computer> cSortYear();
 
     void deleteName(string name);
+    void deleteComputer(string name);
 
 private:
     vector<person> writeToVector(QSqlQuery query);
     vector<computer> writeComToVector(QSqlQuery query);
     void deleteName(string name, bool db_ok);
+    void deleteComputer(string name, bool db_ok);
 
     bool db_ok;
     person pers;
     computer com;
     QSqlDatabase db;
-    const QString DB_LOCATION = "C:\\Users\\Einir\\Documents\\Verk1\\Vika2\\Skil2\\programmers.sqlite";
+    const QString DB_LOCATION = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers.sqlite";
 };
 
 #endif // DATABASE_H

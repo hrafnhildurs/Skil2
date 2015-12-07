@@ -14,6 +14,7 @@ public:
     vector<person> birthYearSort();
 
     void deleteName(string name);
+    void deleteComputer(string name);
     vector<person> search(string searchWord);
 
     void addComputer(string cn, int cy, string ct, string cb);
