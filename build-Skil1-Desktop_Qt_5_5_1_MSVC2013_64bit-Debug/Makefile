@@ -211,6 +211,7 @@ Makefile: ..\Skil1\Skil1.pro H:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013\qmake.
 		H:\Qt\5.5\msvc2013_64\mkspecs\features\yacc.prf \
 		H:\Qt\5.5\msvc2013_64\mkspecs\features\lex.prf \
 		..\Skil1\Skil1.pro \
+		H:/Qt/5.5/msvc2013_64/lib/Qt5Sql.prl \
 		H:/Qt/5.5/msvc2013_64/lib/Qt5Core.prl
 	$(QMAKE) -spec win32-msvc2013 "CONFIG+=debug" -o Makefile ..\Skil1\Skil1.pro
 H:\Qt\5.5\msvc2013_64\mkspecs\features\spec_pre.prf:
@@ -351,6 +352,7 @@ H:\Qt\5.5\msvc2013_64\mkspecs\features\exceptions.prf:
 H:\Qt\5.5\msvc2013_64\mkspecs\features\yacc.prf:
 H:\Qt\5.5\msvc2013_64\mkspecs\features\lex.prf:
 ..\Skil1\Skil1.pro:
+H:/Qt/5.5/msvc2013_64/lib/Qt5Sql.prl:
 H:/Qt/5.5/msvc2013_64/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec win32-msvc2013 "CONFIG+=debug" -o Makefile ..\Skil1\Skil1.pro

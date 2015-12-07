@@ -27,6 +27,8 @@ private:
     void computerSortMenu();
     char computerSortSwitch();
     void addComputer();
+    void writeOutPersonVector(vector<person> person);
+    void writeOutComVector(vector<computer> computer);
 };
 
 #endif // INTERFACE_H

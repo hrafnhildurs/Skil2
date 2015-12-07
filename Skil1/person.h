@@ -17,6 +17,13 @@ public:
     person();
     person(string& n, string& s, int& b, int& d);
     person(string& n, string& s, int& b);
+
+    string returnName();
+    string returnSex();
+    int returnBirthYear();
+    int returnDeathYear();
+    void addToPerson(string n, string s, int b, int d);
+
     friend istream &operator >> (istream& ins, person& a);
 };
 

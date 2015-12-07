@@ -1,39 +1,28 @@
 #ifndef MANAGER_H
 #define MANAGER_H
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-#include <algorithm>
-#include <cstdlib>
-#include <cstring>
-#include <iomanip>
-#include "person.h"
-#include "computer.h"
-#include <QtSql>
+#include "database.h"
 
 class Manager
 {
 public:
     Manager();
-    void addPerson();
-    QSqlDatabase readFromFile();
-    void alphabeticSortAsc(QSqlDatabase db);
-    void alphabeticSortDes(QSqlDatabase db);
-    void birthYearSort(QSqlDatabase db);
-    void asInserted(QSqlDatabase db);
-    void deleteName(QSqlDatabase db);
-    string readSearchWord();
-    void search(QSqlDatabase db, string searchWord);
-    void computerSortAsc(QSqlDatabase db);
-    void computerSortDesc(QSqlDatabase db);
-    void computerSortYear(QSqlDatabase db);
-    void addComputer();
-    //void search(const char doc[], string letters);
-    //void DocString (const char doc[], vector<string> stringVec);
+    void addPersonAlive(string n, string s, int b);
+    void addPersonDead(string n, string s, int b, int d);
+    vector<person> asInserted();
+    vector<person> alphabeticSortAsc();
+    vector<person> alphabeticSortDes();
+    vector<person> birthYearSort();
+
+    void deleteName(string name);
+    vector<person> search(string searchWord);
+
+    void addComputer(string cn, int cy, string ct, string cb);
+    vector<computer> computerSortAsc();
+    vector<computer> computerSortDesc();
+    vector<computer> computerSortYear();
+
 private:
-    person pers;
-    computer com;
+    Database db;
 };
 
 #endif // MANAGER_H

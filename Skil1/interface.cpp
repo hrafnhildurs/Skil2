@@ -1,6 +1,6 @@
 #include "interface.h"
 
-// Starts the program, displays menu and loops while input != 5
+// Starts the program, displays menu and loops while input != 7
 void Interface::start() {
     char number = 0;
     do
@@ -68,12 +68,67 @@ char Interface::indexSwitch() {
 
 // Helper function that calls addPerson()function from Manager class
 void Interface::addPerson() {
-    manager.addPerson();
+    char ans;
+    cout << "Is the person alive? (y/n) ";
+    cin >> ans;
+
+    string name;
+    string sex;
+    int born;
+    int died;
+
+    if(ans == 'y' || ans == 'Y') {
+        cout << "Name: ";
+        cin >> ws;
+        getline(cin, name);
+        cout << "Sex: ";
+        getline(cin, sex);
+        cout << "Birth year: ";
+        cin >> born;
+
+        manager.addPersonAlive(name, sex, born);
+    }
+    else {
+        cout << "Name: ";
+        cin >> ws;
+        getline(cin, name);
+        cout << "Sex: ";
+        getline(cin, sex);
+        cout << "Birth year: ";
+        cin >> born;
+        cout << "Death year: ";
+        cin >> died;
+
+        manager.addPersonDead(name, sex, born, died);
+    }
+    cout << "   Person added to database." << endl;
 }
+
+
 void Interface::addComputer() {
-    manager.addComputer();
+    string cname;
+    int cyear;
+    string ctype;
+    string cbuilt;
+
+    cout << "Name: ";
+    cin >> ws;
+    getline(cin, cname);
+    cout << "Year built: ";
+    cin >> cyear;
+    cout << "Type: ";
+    cin >> ctype;
+    char ans;
+    cout << "was it made ?(y/n): ";
+    cin >> ans;
+    if(ans == 'y')
+        cbuilt = "yes";
+    else
+        cbuilt = "no";
+    manager.addComputer(cname, cyear, ctype, cbuilt);
 }
-// Displayes the sorting menu and loops while input != 3
+
+// Displayes the sorting menu and loops while input != 5
 void Interface::sortMenu() {
     char number = 0;
     do
@@ -130,34 +185,45 @@ char Interface::sortSwitch() {
 
 // Calls the ascending sorting function in Manager class
 void Interface::sortAsc() {
+    vector<person> tmp = manager.alphabeticSortAsc();
     databaseHeader();
-    manager.alphabeticSortAsc(manager.readFromFile());
+    writeOutPersonVector(tmp);
 }
 
 // Calls the descending sorting function in Manager class
 void Interface::sortDes() {
+    vector<person> tmp = manager.alphabeticSortDes();
     databaseHeader();
-    manager.alphabeticSortDes(manager.readFromFile());
+    writeOutPersonVector(tmp);
 }
 
 void Interface::sortBirthYearAsc() {
+    vector<person> tmp = manager.birthYearSort();
     databaseHeader();
-    manager.birthYearSort(manager.readFromFile());
+    writeOutPersonVector(tmp);
 }
 
 void Interface::asInserted() {
+    vector<person> tmp = manager.asInserted();
     databaseHeader();
-    manager.asInserted(manager.readFromFile());
+    writeOutPersonVector(tmp);
 }
 void Interface::computerSortAsc() {
-    manager.computerSortAsc(manager.readFromFile());
+    vector<computer> tmp = manager.computerSortAsc();
+    //cDatabaseHeader();
+    writeOutComVector(tmp);
 }
 void Interface::computerSortDesc() {
-    manager.computerSortDesc(manager.readFromFile());
+    vector<computer> tmp = manager.computerSortDesc();
+    //cDatabaseHeader();
+    writeOutComVector(tmp);
 }
 void Interface::computerSortYear() {
-    manager.computerSortYear(manager.readFromFile());
+    vector<computer> tmp = manager.computerSortYear();
+    //cDatabaseHeader();
+    writeOutComVector(tmp);
 }
+
 void Interface::computerSortMenu() {
     char number = 0;
     do
@@ -178,9 +244,8 @@ void Interface::computerSortMenu() {
 }
 char Interface::computerSortSwitch() {
     char number;
-
-
     cin >> number;
+
     switch(number)
     {
         case '1':
@@ -208,14 +273,20 @@ char Interface::computerSortSwitch() {
 // Calls the search function in Manager class
 void Interface::search() {
     string searchWord;
-    searchWord = manager.readSearchWord();
+    cout << setw(52) << "Enter search word: ";
+    cin >> searchWord;
     searchHeader();
-    manager.search(manager.readFromFile(),searchWord);
+    vector<person> search = manager.search(searchWord);
+    writeOutPersonVector(search);
 }
 
 // Calls the deletePerson function in Manager class
 void Interface::deletePerson() {
-    manager.deleteName(manager.readFromFile());
+    string del;
+    cout << "Enter a full name of the person you want to delete: ";
+    cin >> ws;
+    getline(cin, del);
+    manager.deleteName(del);
 }
 
 // Prints out the database header when list is displayed
@@ -240,4 +311,22 @@ void Interface::searchHeader()
     cout << "\n";
     cout << setw(10) << "Name" << setw(31) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" << setw(16) << "Date/time" << endl;
     cout << "   ======================================================================================" << endl;
+}
+
+void Interface::writeOutPersonVector(vector<person> pers) {
+    for (size_t i = 0 ; i < pers.size() ; i++) {
+        cout << pers[i].returnName() << ", " <<
+                pers[i].returnSex() << ", " <<
+                pers[i].returnBirthYear() << ", " <<
+                pers[i].returnDeathYear() << endl;
+    }
+}
+
+void Interface::writeOutComVector(vector<computer> computer) {
+    for (size_t i = 0 ; i < computer.size() ; i++) {
+        cout << computer[i].returnComName() << ", " <<
+                computer[i].returnComYear() << ", " <<
+                computer[i].returnComType() << ", " <<
+                computer[i].returnComBuilt() << endl;
+    }
 }

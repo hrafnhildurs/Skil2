@@ -12,11 +12,13 @@ SOURCES += main.cpp \
     person.cpp \
     interface.cpp \
     manager.cpp \
-    computer.cpp
+    computer.cpp \
+    database.cpp
 
 HEADERS += \
     person.h \
     interface.h \
     manager.h \
-    computer.h
+    computer.h \
+    database.h
 
