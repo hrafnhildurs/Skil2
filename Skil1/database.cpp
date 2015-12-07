@@ -94,13 +94,40 @@ vector<person> Database::pSortByBirthYear() {
 vector<person> Database::search(string searchWord) {
     QSqlQuery query;
     QString search(searchWord.c_str());
-    //if(db_ok) {
+    locale loc;
+
+    if(isdigit(searchWord[0],loc)){
+        query.prepare("SELECT * FROM programmers WHERE birthYear LIKE '%' || ? || '%' ");
+        query.addBindValue(search);
+        query.exec();
+    }
+    else{
         query.prepare("SELECT * FROM programmers WHERE name LIKE '%' || ? || '%' ");
         query.addBindValue(search);
         query.exec();
+    }
 
-        return writeToVector(query);
-    //}
+    return writeToVector(query);
+}
+
+vector<computer> Database::searchComp(string searchWord)
+{
+    QSqlQuery query;
+    QString search(searchWord.c_str());
+    locale loc;
+
+    if(isdigit(searchWord[0],loc)){
+        query.prepare("SELECT * FROM computers WHERE year LIKE '%' || ? || '%' ");
+        query.addBindValue(search);
+        query.exec();
+    }
+    else{
+        query.prepare("SELECT * FROM computers WHERE name LIKE '%' || ? || '%' ");
+        query.addBindValue(search);
+        query.exec();
+    }
+
+    return writeComToVector(query);
 }
 
 void Database::deleteName(string name) {

@@ -20,6 +20,7 @@ private:
     void databaseHeader();
     void searchHeader();
     void search();
+    void searchComp();
     void deletePerson();
     void deleteComputer();
     void computerSortAsc();
@@ -34,6 +35,8 @@ private:
     char viewSwitch();
     void deleteMenu();
     char deleteSwitch();
+    void searchMenu();
+    char searchSwitch();
     void writeOutPersonVector(vector<person> person);
     void writeOutComVector(vector<computer> computer);
 };

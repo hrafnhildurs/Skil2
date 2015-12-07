@@ -43,7 +43,7 @@ char Interface::indexSwitch() {
             return '3';
             break;
         case '4':
-            search();
+            searchMenu();
             return '4';
             break;
         case '5':
@@ -269,6 +269,14 @@ void Interface::search() {
     vector<person> search = manager.search(searchWord);
     writeOutPersonVector(search);
 }
+void Interface::searchComp(){
+    string searchWord;
+    cout << setw(52) << "Enter search word: ";
+    cin >> searchWord;
+    searchHeader();
+    vector<computer> search = manager.searchComp(searchWord);
+    writeOutComVector(search);
+}
 
 // Calls the deletePerson function in Manager class
 void Interface::deletePerson() {
@@ -437,6 +445,47 @@ char Interface::deleteSwitch() {
             break;
         case '2':
             deleteComputer();
+            return '2';
+            break;
+        case '3':
+            return '3';
+            break;
+        default:
+            cout << "   Invalid input.";
+            return '0';
+            break;
+        }
+}
+
+void Interface::searchMenu() {
+    char number = 0;
+    do
+    {
+        cout << "\n\n";
+        cout << setw(55) << "Delete menu" << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << setw(50) << "1.  Person search" << endl;
+        cout << setw(52) << "2.  Computer search" << endl;
+        cout << setw(54) << "3.  Exit search menu " << endl;
+        cout << "   ======================================================================================" << endl;
+        cout << "\n";
+        cout << setw(55) << "Enter your selection: ";
+        number = searchSwitch();
+    }while(number != '3');
+    cout << "\n\n";
+}
+char Interface::searchSwitch() {
+    char number;
+    cin >> number;
+
+    switch(number)
+    {
+        case '1':
+            search();
+            return '1';
+            break;
+        case '2':
+            searchComp();
             return '2';
             break;
         case '3':

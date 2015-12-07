@@ -21,6 +21,7 @@ public:
     vector<computer> computerSortAsc();
     vector<computer> computerSortDesc();
     vector<computer> computerSortYear();
+    vector<computer> searchComp(string searchWord);
 
 private:
     Database db;

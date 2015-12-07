@@ -57,3 +57,6 @@ vector<computer> Manager::computerSortDesc() {
 vector<computer> Manager::computerSortYear() {
     return db.cSortYear();
 }
+vector<computer> Manager::searchComp(string searchWord) {
+    return db.searchComp(searchWord);
+}
