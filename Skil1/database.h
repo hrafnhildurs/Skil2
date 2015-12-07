@@ -47,7 +47,7 @@ private:
     person pers;
     computer com;
     QSqlDatabase db;
-    const QString DB_LOCATION = "C:\\Users\\IceVinking\\Documents\\Skole\\githubSkole\\Skil2\\programmers.sqlite";
+    const QString DB_LOCATION = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers.sqlite";
 };
 
 #endif // DATABASE_H

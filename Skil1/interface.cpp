@@ -130,7 +130,7 @@ void Interface::sortMenu() {
         cout << setw(60) << "2.  Descending alphabetic sort" << endl;
         cout << setw(52) << "3.  Sort by date added" << endl;
         cout << setw(57) << "4.  Sort by birth year ACS " << endl;
-        cout << setw(49) << "5.  Exit sort menu " << endl;
+        cout << setw(51) << "5.  Exit to view menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
@@ -200,17 +200,17 @@ void Interface::asInserted() {
 }
 void Interface::computerSortAsc() {
     vector<computer> tmp = manager.computerSortAsc();
-    //cDatabaseHeader();
+    cDatabaseHeader();
     writeOutComVector(tmp);
 }
 void Interface::computerSortDesc() {
     vector<computer> tmp = manager.computerSortDesc();
-    //cDatabaseHeader();
+    cDatabaseHeader();
     writeOutComVector(tmp);
 }
 void Interface::computerSortYear() {
     vector<computer> tmp = manager.computerSortYear();
-    //cDatabaseHeader();
+    cDatabaseHeader();
     writeOutComVector(tmp);
 }
 
@@ -224,7 +224,7 @@ void Interface::computerSortMenu() {
         cout << setw(59) << "1.  Ascending alphabetic sort" << endl;
         cout << setw(60) << "2.  Descending alphabetic sort" << endl;
         cout << setw(52) << "3.  Sort by year built" << endl;
-        cout << setw(49) << "4.  Exit sort menu " << endl;
+        cout << setw(51) << "4.  Exit to view menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
@@ -273,7 +273,7 @@ void Interface::searchComp(){
     string searchWord;
     cout << setw(52) << "Enter search word: ";
     cin >> searchWord;
-    searchHeader();
+    cSearchHeader();
     vector<computer> search = manager.searchComp(searchWord);
     writeOutComVector(search);
 }
@@ -303,10 +303,20 @@ void Interface::databaseHeader()
     cout << setw(40) << "Database" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(10) << "Name" << setw(31) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" << setw(16) << "Date/Time" <<endl;
+    cout << setw(10) << "Name" << setw(28) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" <<endl;
     cout << "   ======================================================================================" << endl;
 }
-
+// Prints out the database header when list is displayed
+void Interface::cDatabaseHeader()
+{
+    cout << "\n";
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << setw(40) << "Database" << endl;
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << "\n";
+    cout << setw(10) << "Name" << setw(31) << "Type" << setw(15) << "Year built" << setw(8) << "Built"<<endl;
+    cout << "   ======================================================================================" << endl;
+}
 // Prints out the search header when search results are displayed
 void Interface::searchHeader()
 {
@@ -315,25 +325,37 @@ void Interface::searchHeader()
     cout << setw(40) << "Search results" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(10) << "Name" << setw(31) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" << setw(16) << "Date/time" << endl;
+    cout << setw(10) << "Name" << setw(31) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" << endl;
+    cout << "   ======================================================================================" << endl;
+}
+void Interface::cSearchHeader()
+{
+    cout << "\n";
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << setw(40) << "Search results" << endl;
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << "\n";
+    cout << setw(10) << "Name" << setw(31) << "Type" << setw(15) << "Year built" << setw(10) << "Built" << endl;
     cout << "   ======================================================================================" << endl;
 }
 
 void Interface::writeOutPersonVector(vector<person> pers) {
     for (size_t i = 0 ; i < pers.size() ; i++) {
-        cout << pers[i].returnName() << ", " <<
-                pers[i].returnSex() << ", " <<
-                pers[i].returnBirthYear() << ", " <<
-                pers[i].returnDeathYear() << endl;
+        cout << "   " << setw(pers[i].returnName().length()) << pers[i].returnName() <<
+                setw(12 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
+                setw(8) << pers[i].returnBirthYear()  <<
+                setw(10) << pers[i].returnDeathYear() << endl;
     }
 }
 
 void Interface::writeOutComVector(vector<computer> computer) {
     for (size_t i = 0 ; i < computer.size() ; i++) {
-        cout << computer[i].returnComName() << ", " <<
-                computer[i].returnComYear() << ", " <<
-                computer[i].returnComType() << ", " <<
-                computer[i].returnComBuilt() << endl;
+        cout << "   " << setw(computer[i].returnComName().length())
+             << computer[i].returnComName()
+             << setw(15 +(25 - computer[i].returnComName().length()))
+             << computer[i].returnComType() << setw(9)
+             << computer[i].returnComYear() << setw(10)
+             << computer[i].returnComBuilt() << endl;
     }
 }
 void Interface::inputMenu() {
@@ -385,13 +407,13 @@ void Interface::viewMenu() {
         cout << "   ======================================================================================" << endl;
         cout << setw(57) << "1.  View list of persons" << endl;
         cout << setw(59) << "2.  View list of computers" << endl;
-        cout << setw(52) << "3.  Exit view menu " << endl;
+        cout << setw(51) << "3.  Exit view menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = viewSwitch();
-    }while(number != '3');
     cout << "\n\n";
+    }while(number != '3');
 }
 char Interface::viewSwitch() {
     char number;
@@ -462,7 +484,7 @@ void Interface::searchMenu() {
     do
     {
         cout << "\n\n";
-        cout << setw(55) << "Delete menu" << endl;
+        cout << setw(55) << "Search menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << setw(50) << "1.  Person search" << endl;
         cout << setw(52) << "2.  Computer search" << endl;

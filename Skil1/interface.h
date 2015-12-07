@@ -37,6 +37,8 @@ private:
     char deleteSwitch();
     void searchMenu();
     char searchSwitch();
+    void cDatabaseHeader();
+    void cSearchHeader();
     void writeOutPersonVector(vector<person> person);
     void writeOutComVector(vector<computer> computer);
 };
