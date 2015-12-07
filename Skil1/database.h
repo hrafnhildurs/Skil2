@@ -11,6 +11,7 @@
 #include <locale>
 #include "person.h"
 #include "computer.h"
+#include "relations.h"
 #include <QtSql>
 
 class Database
@@ -21,6 +22,7 @@ public:
     void addPersonAlive(string n, string s, int b);
     void addPersonDead(string n, string s, int b, int d);
     void addComputer(string cn, int cy, string ct, string cb);
+    void addRelations(string c, string p);
     bool connectionOk();
 
     vector<person> pSortAsInserted();
@@ -34,20 +36,25 @@ public:
     vector<computer> cSortYear();
     vector<computer> searchComp(string searchWord);
 
+    vector<relations> relation();
+
     void deleteName(string name);
     void deleteComputer(string name);
 
 private:
     vector<person> writeToVector(QSqlQuery query);
     vector<computer> writeComToVector(QSqlQuery query);
+    vector<relations> writeOutComAndPersonVector(QSqlQuery query);
+
     void deleteName(string name, bool db_ok);
     void deleteComputer(string name, bool db_ok);
 
     bool db_ok;
     person pers;
     computer com;
+    relations rel;
     QSqlDatabase db;
-    const QString DB_LOCATION = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers.sqlite";
+    const QString DB_LOCATION = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\Skil2\\programmers2.sqlite";
 };
 
 #endif // DATABASE_H

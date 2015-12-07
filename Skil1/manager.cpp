@@ -14,6 +14,9 @@ void Manager::addPersonDead(string n, string s, int b, int d) {
 void Manager::addComputer(string cn, int cy, string ct, string cb) {
     db.addComputer(cn, cy, ct, cb);
 }
+void Manager::addToRelations(string c, string p) {
+    db.addRelations(c, p);
+}
 
 // Prints the list ordered by time inserted
 vector<person> Manager::asInserted() {
@@ -59,4 +62,7 @@ vector<computer> Manager::computerSortYear() {
 }
 vector<computer> Manager::searchComp(string searchWord) {
     return db.searchComp(searchWord);
+}
+vector<relations> Manager::relation() {
+    return db.relation();
 }

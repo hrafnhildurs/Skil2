@@ -56,7 +56,17 @@ void Database::addComputer(string cn, int cy, string ct, string cb) {
     query.addBindValue(cbuilt);
     query.exec();
 }
+void Database::addRelations(string c, string p) {
+    QString cname(c.c_str());
+    QString pname(p.c_str());
 
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO pAndc VALUES(?, ?)");
+    query.addBindValue(cname);
+    query.addBindValue(pname);
+    query.exec();
+}
 vector<person> Database::writeToVector(QSqlQuery query) {
     vector<person> tmp;
     while (query.next())
@@ -172,6 +182,12 @@ vector<computer> Database::cSortYear() {
     QSqlQuery query("SELECT * FROM computers ORDER BY year ASC");
     return writeComToVector(query);
 }
+vector<relations> Database::relation() {
+    QSqlQuery query("SELECT c.name, p.name FROM pAndc pac JOIN computers c"
+                    " ON c.id = pac.computers_id JOIN programmers p ON "
+                    "p.id = pac.programmers_id");
+    return writeOutComAndPersonVector(query);
+}
 
 vector<computer> Database::writeComToVector(QSqlQuery query) {
     vector<computer> tmp;
@@ -183,6 +199,17 @@ vector<computer> Database::writeComToVector(QSqlQuery query) {
                          query.value(4).toString().toStdString());
 
         tmp.push_back(com);
+    }
+    return tmp;
+}
+vector<relations> Database::writeOutComAndPersonVector(QSqlQuery query) {
+    vector<relations> tmp;
+    while (query.next())
+    {
+       rel.addToRelations(query.value(1).toString().toStdString(),
+                         query.value(2).toString().toStdString());
+
+        tmp.push_back(rel);
     }
     return tmp;
 }

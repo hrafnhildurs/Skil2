@@ -294,6 +294,11 @@ void Interface::deleteComputer() {
     getline(cin, del);
     manager.deleteComputer(del);
 }
+void Interface::relation() {
+    vector<relations> tmp = manager.relation();
+    relationsHeader();
+    writeOutComAndPersonVector(tmp);
+}
 
 // Prints out the database header when list is displayed
 void Interface::databaseHeader()
@@ -338,7 +343,16 @@ void Interface::cSearchHeader()
     cout << setw(10) << "Name" << setw(31) << "Type" << setw(15) << "Year built" << setw(10) << "Built" << endl;
     cout << "   ======================================================================================" << endl;
 }
-
+void Interface::relationsHeader()
+{
+    cout << "\n";
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << setw(40) << "Relations" << endl;
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << "\n";
+    cout << setw(10) << "Computer" << setw(31) << "Programmer" <<endl;
+    cout << "   ======================================================================================" << endl;
+}
 void Interface::writeOutPersonVector(vector<person> pers) {
     for (size_t i = 0 ; i < pers.size() ; i++) {
         cout << "   " << setw(pers[i].returnName().length()) << pers[i].returnName() <<
@@ -356,6 +370,15 @@ void Interface::writeOutComVector(vector<computer> computer) {
              << computer[i].returnComType() << setw(9)
              << computer[i].returnComYear() << setw(10)
              << computer[i].returnComBuilt() << endl;
+    }
+}
+void Interface::writeOutComAndPersonVector(vector<relations> relation) {
+    for (size_t i = 0 ; i < relation.size() ; i++) {
+        cout << "   " << setw(relation[i].returnCname().length())
+             << relation[i].returnCname()
+             << setw(15 + (25 - relation[i].returnCname().length()))
+             << relation[i].returnPname() << setw(9)
+             << endl;
     }
 }
 void Interface::inputMenu() {
@@ -407,13 +430,14 @@ void Interface::viewMenu() {
         cout << "   ======================================================================================" << endl;
         cout << setw(57) << "1.  View list of persons" << endl;
         cout << setw(59) << "2.  View list of computers" << endl;
-        cout << setw(51) << "3.  Exit view menu" << endl;
+        cout << setw(51) << "3.  View relations" << endl;
+        cout << setw(51) << "4.  Exit view menu" << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = viewSwitch();
     cout << "\n\n";
-    }while(number != '3');
+    }while(number != '4');
 }
 char Interface::viewSwitch() {
     char number;
@@ -430,7 +454,11 @@ char Interface::viewSwitch() {
             return '2';
             break;
         case '3':
+            relation();
             return '3';
+            break;
+        case '4':
+            return '4';
             break;
         default:
             cout << "   Invalid input.";

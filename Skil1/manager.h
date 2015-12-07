@@ -23,6 +23,9 @@ public:
     vector<computer> computerSortYear();
     vector<computer> searchComp(string searchWord);
 
+    void addToRelations(string c, string p);
+    vector<relations> relation();
+
 private:
     Database db;
 };

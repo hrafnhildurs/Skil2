@@ -39,8 +39,11 @@ private:
     char searchSwitch();
     void cDatabaseHeader();
     void cSearchHeader();
+    void relationsHeader();
+    void relation();
     void writeOutPersonVector(vector<person> person);
     void writeOutComVector(vector<computer> computer);
+    void writeOutComAndPersonVector(vector<relations> relation);
 };
 
 #endif // INTERFACE_H
