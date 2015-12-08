@@ -23,6 +23,7 @@ private:
     void searchComp();
     void deletePerson();
     void deleteComputer();
+    void deleteRelation();
     void computerAsInserted();
     void computerSortAsc();
     void computerSortDesc();

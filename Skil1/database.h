@@ -42,6 +42,7 @@ public:
 
     void deleteName(string name);
     void deleteComputer(string name);
+    void deleteRelation(int id);
 
 private:
     vector<person> writeToVector(QSqlQuery query);
@@ -51,6 +52,7 @@ private:
 
     void deleteName(string name, bool db_ok);
     void deleteComputer(string name, bool db_ok);
+    void deleteRelation(int id, bool db_ok);
 
     bool db_ok;
     person pers;

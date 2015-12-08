@@ -59,7 +59,7 @@ void Database::addComputer(string cn, int cy, string ct, string cb) {
 void Database::addRelations(int pid, int cid) {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO relation VALUES(?, ?)");
+    query.prepare("INSERT INTO relation VALUES(NULL,?, ?)");
     query.addBindValue(cid);
     query.addBindValue(pid);
     query.exec();
@@ -154,6 +154,9 @@ void Database::deleteName(string name) {
 void Database::deleteComputer(string name) {
     deleteComputer(name, db_ok);
 }
+void Database::deleteRelation(int id) {
+    deleteRelation(id, db_ok);
+}
 
 void Database::deleteName(string name, bool db_ok) {
     if(db_ok) {
@@ -172,6 +175,15 @@ void Database::deleteComputer(string name, bool db_ok) {
         QSqlQuery query;
         query.prepare("DELETE FROM computers WHERE name = ?");
         query.addBindValue(nameToDel);
+        query.exec();
+    }
+}
+void Database::deleteRelation(int id, bool db_ok) {
+    if(db_ok) {
+
+        QSqlQuery query;
+        query.prepare("DELETE FROM relation WHERE id = ?");
+        query.addBindValue(id);
         query.exec();
     }
 }

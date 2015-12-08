@@ -55,6 +55,10 @@ void Manager::deleteComputer(string name){
     db.deleteComputer(name);
 }
 
+void Manager::deleteRelation(int id){
+    db.deleteRelation(id);
+}
+
 vector<computer> Manager::computerAsInserted() {
     return db.cAsInserted();
 }

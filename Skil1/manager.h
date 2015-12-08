@@ -15,6 +15,7 @@ public:
 
     void deleteName(string name);
     void deleteComputer(string name);
+    void deleteRelation(int id);
     vector<person> search(string searchWord);
 
     void addComputer(string cn, int cy, string ct, string cb);
