@@ -23,9 +23,14 @@ void relations::addToRelations(int cid, int pid) {
     this->rcid = cid;
     this->rpid = pid;
 }
-void relations::addNamesToRelations(string p, string c) {
+void relations::addNamesToRelations(int id, string p, string c) {
+    this->rid = id;
     this->rpname = p;
     this->rcname = c;
+}
+
+int relations::returnRid() {
+    return rid;
 }
 
 int relations::returnCid() {

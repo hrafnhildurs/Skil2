@@ -26,7 +26,7 @@ public:
     vector<computer> searchComp(string searchWord);
 
     void addRelations(int pid, int cid);
-    void addNamesRelations(string p, string c);
+    void addNamesRelations(int id, string p, string c);
     vector<relations> relation();
 
 private:

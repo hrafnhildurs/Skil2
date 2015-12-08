@@ -64,12 +64,13 @@ void Database::addRelations(int pid, int cid) {
     query.addBindValue(pid);
     query.exec();
 }
-void Database::addNamesRelations(string p, string c) {
+void Database::addNamesRelations(int id, string p, string c) {
     QSqlQuery query;
     QString pname(p.c_str());
     QString cname(c.c_str());
 
-    query.prepare("INSERT INTO relation VALUES(?, ?)");
+    query.prepare("INSERT INTO relation VALUES(?, ?, ?)");
+    query.addBindValue(id);
     query.addBindValue(pname);
     query.addBindValue(cname);
     query.exec();
@@ -209,7 +210,7 @@ vector<computer> Database::cSortYear() {
 }
 
 vector<relations> Database::relation() {
-    QSqlQuery query("SELECT c.name, p.name FROM relation AS pac JOIN computers AS c ON c.id = pac.computers_id JOIN programmers AS p ON p.id = pac.programmers_id");
+    QSqlQuery query("SELECT r.id, c.name, p.name FROM relation AS r JOIN computers AS c ON c.id = r.computers_id JOIN programmers AS p ON p.id = r.programmers_id");
     return writeOutRelations(query);
 }
 
@@ -243,9 +244,9 @@ vector<relations> Database::writeOutRelations(QSqlQuery query) {
     vector<relations> tmp;
     while (query.next())
     {
-       rel.addNamesToRelations(
-                          query.value(0).toString().toStdString(),
-                          query.value(1).toString().toStdString());
+       rel.addNamesToRelations(query.value(0).toInt(),
+                          query.value(1).toString().toStdString(),
+                          query.value(2).toString().toStdString());
 
         tmp.push_back(rel);
     }

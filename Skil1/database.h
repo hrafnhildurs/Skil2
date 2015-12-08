@@ -23,7 +23,7 @@ public:
     void addPersonDead(string n, string s, int b, int d);
     void addComputer(string cn, int cy, string ct, string cb);
     void addRelations(int pid, int cid);
-    void addNamesRelations(string p, string c);
+    void addNamesRelations(int id, string p, string c);
     bool connectionOk();
 
     vector<person> pSortAsInserted();
@@ -59,7 +59,7 @@ private:
     computer com;
     relations rel;
     QSqlDatabase db;
-    const QString DB_LOCATION = "C:\\Users\\hivSteini\\Desktop\\Verklegt1\\Verklegt-namskeid-1\\Skil2\\programmers2.sqlite";
+    const QString DB_LOCATION = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\skil2\\programmers2.sqlite";
 };
 
 #endif // DATABASE_H

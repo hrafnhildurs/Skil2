@@ -304,6 +304,8 @@ void Interface::deleteComputer() {
 
 void Interface::deleteRelation() {
     int del;
+    relationsHeader();
+    relation();
     cout << "Enter id ";
     cin >> del;
     manager.deleteRelation(del);
@@ -311,7 +313,7 @@ void Interface::deleteRelation() {
 void Interface::relation() {
     vector<relations> tmp = manager.relation();
     relationsHeader();
-    writeOutComAndPersonVector2(tmp);
+    writeOutRelations(tmp);
 }
 
 // Prints out the database header when list is displayed
@@ -364,7 +366,7 @@ void Interface::relationsHeader()
     cout << setw(40) << "Relations" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(13) << "Programmer" << setw(53) << "Computer" <<endl;
+    cout << setw(5) << "ID" << setw(15) << "Programmer" << setw(48) << "Computer" <<endl;
     cout << "   ======================================================================================" << endl;
 }
 
@@ -410,11 +412,12 @@ void Interface::writeOutComVectorId(vector<computer> computer) {
     }
 }
 
-void Interface::writeOutComAndPersonVector2(vector<relations> relation) {
+void Interface::writeOutRelations(vector<relations> relation) {
     for (size_t i = 0 ; i < relation.size() ; i++) {
-        cout << "   " << setw(relation[i].returnCname().length())
+        cout << "   " << relation[i].returnRid()
+             << setw(5 + relation[i].returnCname().length())
              << relation[i].returnCname()
-             << setw(25 +(30 - relation[i].returnCname().length()) + (relation[i].returnPname().length()))
+             << setw(25 +(25 - relation[i].returnCname().length()) + (relation[i].returnPname().length()))
              << relation[i].returnPname()
              << endl;
     }
@@ -519,7 +522,7 @@ void Interface::deleteMenu() {
         cout << "   ======================================================================================" << endl;
         cout << setw(64) << "1.  Delete person from database" << endl;
         cout << setw(66) << "2.  Delete computer from database" << endl;
-        cout << setw(64) << "3.  Delete relation from database" << endl;
+        cout << setw(66) << "3.  Delete relation from database" << endl;
         cout << setw(54) << "4.  Exit delete menu " << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";

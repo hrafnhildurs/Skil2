@@ -48,7 +48,7 @@ private:
     void writeOutPersonVectorId(vector<person>);
     void writeOutComVector(vector<computer> computer);
     void writeOutComVectorId(vector<computer>);
-    void writeOutComAndPersonVector2(vector<relations> relation);
+    void writeOutRelations(vector<relations> relation);
     int choosePerson();
     int chooseComputer();
 };

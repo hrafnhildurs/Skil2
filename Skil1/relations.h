@@ -12,6 +12,7 @@ protected:
     string rpname;
     int rcid;
     int rpid;
+    int rid;
 public:
     relations();
     relations(int &cid, int &pid);
@@ -19,9 +20,10 @@ public:
     string returnCname();
     int returnCid();
     int returnPid();
+    int returnRid();
 
     void addToRelations(int cid, int pid);
-    void addNamesToRelations(string c, string p);
+    void addNamesToRelations(int id, string c, string p);
 
 };
 

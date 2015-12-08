@@ -17,8 +17,8 @@ void Manager::addComputer(string cn, int cy, string ct, string cb) {
 void Manager::addRelations(int pid, int cid) {
     db.addRelations(pid, cid);
 }
-void Manager::addNamesRelations(string p, string c) {
-    db.addNamesRelations(p, c);
+void Manager::addNamesRelations(int id, string p, string c) {
+    db.addNamesRelations(id, p, c);
 }
 
 
