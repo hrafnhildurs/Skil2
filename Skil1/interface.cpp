@@ -31,18 +31,22 @@ char Interface::indexSwitch() {
     switch(number)
     {
         case '1':
+            system("CLS");
             inputMenu();
             return '1';
             break;
         case '2':
+            system("CLS");
             viewMenu();
             return '2';
             break;
         case '3':
+            system("CLS");
             deleteMenu();
             return '3';
             break;
         case '4':
+            system("CLS");
             searchMenu();
             return '4';
             break;
@@ -59,8 +63,10 @@ char Interface::indexSwitch() {
 // Helper function that calls addPerson()function from Manager class
 void Interface::addPerson() {
     char ans;
-    cout << "Is the person alive? (y/n) ";
+    cout << endl;
+    cout << setw(60) << "Is the person alive? (y/n) ";
     cin >> ans;
+    cout << endl;
 
     string name;
     string sex;
@@ -68,30 +74,31 @@ void Interface::addPerson() {
     int died;
 
     if(ans == 'y' || ans == 'Y') {
-        cout << "Name: ";
+        cout << setw(39) << "Name: ";
         cin >> ws;
         getline(cin, name);
-        cout << "Sex: ";
+        cout << setw(38) << "Sex: ";
         getline(cin, sex);
-        cout << "Birth year: ";
+        cout << setw(45) << "Birth year: ";
         cin >> born;
 
         manager.addPersonAlive(name, sex, born);
     }
     else {
-        cout << "Name: ";
+        cout << setw(39) << "Name: ";
         cin >> ws;
         getline(cin, name);
-        cout << "Sex: ";
+        cout << setw(38) << "Sex: ";
         getline(cin, sex);
-        cout << "Birth year: ";
+        cout << setw(45) << "Birth year: ";
         cin >> born;
-        cout << "Death year: ";
+        cout << setw(45) << "Death year: ";
         cin >> died;
 
         manager.addPersonDead(name, sex, born, died);
     }
-    cout << "   Person added to database." << endl;
+    cout << endl;
+    cout << setw(58) << "Person added to database." << endl;
 }
 
 
@@ -101,21 +108,24 @@ void Interface::addComputer() {
     string ctype;
     string cbuilt;
 
-    cout << "Name: ";
+    cout << endl;
+    cout << setw(39) << "Name: ";
     cin >> ws;
     getline(cin, cname);
-    cout << "Year built: ";
+    cout << setw(45) << "Year built: ";
     cin >> cyear;
-    cout << "Type: ";
+    cout << setw(39) << "Type: ";
     cin >> ctype;
     char ans;
-    cout << "was it made ?(y/n): ";
+    cout << setw(53) << "was it made ?(y/n): ";
     cin >> ans;
     if(ans == 'y')
         cbuilt = "yes";
     else
         cbuilt = "no";
     manager.addComputer(cname, cyear, ctype, cbuilt);
+    cout << endl;
+    cout << setw(60) << "computer added to database." << endl;
 }
 
 // Displayes the sorting menu and loops while input != 5
@@ -270,6 +280,7 @@ char Interface::computerSortSwitch() {
 // Calls the search function in Manager class
 void Interface::search() {
     string searchWord;
+    cout << endl;
     cout << setw(52) << "Enter search word: ";
     cin >> searchWord;
     searchHeader();
@@ -278,6 +289,7 @@ void Interface::search() {
 }
 void Interface::searchComp(){
     string searchWord;
+    cout << endl;
     cout << setw(52) << "Enter search word: ";
     cin >> searchWord;
     cSearchHeader();
@@ -288,7 +300,8 @@ void Interface::searchComp(){
 // Calls the deletePerson function in Manager class
 void Interface::deletePerson() {
     string del;
-    cout << "Enter a full name of the person you want to delete: ";
+    cout << endl;
+    cout << setw(85) << "Enter a full name of the person you want to delete: ";
     cin >> ws;
     getline(cin, del);
     manager.deleteName(del);
@@ -296,7 +309,8 @@ void Interface::deletePerson() {
 // Calls the deleteComputer function in Manager class
 void Interface::deleteComputer() {
     string del;
-    cout << "Enter a full name of the computer you want to delete: ";
+    cout << endl;
+    cout << setw(87) << "Enter a full name of the computer you want to delete: ";
     cin >> ws;
     getline(cin, del);
     manager.deleteComputer(del);
@@ -304,9 +318,9 @@ void Interface::deleteComputer() {
 
 void Interface::deleteRelation() {
     int del;
-    relationsHeader();
     relation();
-    cout << "Enter id ";
+    cout << endl;
+    cout << setw(37) << "Enter the id you want yo delete: ";
     cin >> del;
     manager.deleteRelation(del);
 }
@@ -321,10 +335,10 @@ void Interface::databaseHeader()
 {
     cout << "\n";
     cout << "   --------------------------------------------------------------------------------------" << endl;
-    cout << setw(40) << "Database" << endl;
+    cout << setw(50) << "Database" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(10) << "Name" << setw(28) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" <<endl;
+    cout << setw(7) << "Name" << setw(42) << "Sex" << setw(19) << "Birth year" << setw(19) << "Death year" <<endl;
     cout << "   ======================================================================================" << endl;
 }
 // Prints out the database header when list is displayed
@@ -332,18 +346,40 @@ void Interface::cDatabaseHeader()
 {
     cout << "\n";
     cout << "   --------------------------------------------------------------------------------------" << endl;
-    cout << setw(40) << "Database" << endl;
+    cout << setw(50) << "Database" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(10) << "Name" << setw(31) << "Type" << setw(15) << "Year built" << setw(8) << "Built"<<endl;
+    cout << setw(7) << "Name" << setw(43) << "Type" << setw(19) << "Year built" << setw(19) << "Built"<<endl;
     cout << "   ======================================================================================" << endl;
 }
+void Interface::idDatabaseHeader()
+{
+    cout << "\n";
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << setw(50) << "Database" << endl;
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << "\n";
+    cout << setw(7) << "ID" << setw(8) << "Name" << setw(36) << "Sex" << setw(19) << "Birth year" << setw(19) << "Death year" <<endl;
+    cout << "   ======================================================================================" << endl;
+}
+// Prints out the database header when list is displayed
+void Interface::idcDatabaseHeader()
+{
+    cout << "\n";
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << setw(50) << "Database" << endl;
+    cout << "   --------------------------------------------------------------------------------------" << endl;
+    cout << "\n";
+    cout << setw(7) << "ID" << setw(8) << "Name" << setw(36) << "Type" << setw(20) << "Year built" << setw(17) << "Built"<<endl;
+    cout << "   ======================================================================================" << endl;
+}
+
 // Prints out the search header when search results are displayed
 void Interface::searchHeader()
 {
     cout << "\n";
     cout << "   --------------------------------------------------------------------------------------" << endl;
-    cout << setw(40) << "Search results" << endl;
+    cout << setw(55) << "Search results" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
     cout << setw(10) << "Name" << setw(31) << "Sex" << setw(12) << "Birth year" << setw(13) << "Death year" << endl;
@@ -353,7 +389,7 @@ void Interface::cSearchHeader()
 {
     cout << "\n";
     cout << "   --------------------------------------------------------------------------------------" << endl;
-    cout << setw(40) << "Search results" << endl;
+    cout << setw(55) << "Search results" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
     cout << setw(10) << "Name" << setw(31) << "Type" << setw(15) << "Year built" << setw(10) << "Built" << endl;
@@ -363,29 +399,29 @@ void Interface::relationsHeader()
 {
     cout << "\n";
     cout << "   --------------------------------------------------------------------------------------" << endl;
-    cout << setw(40) << "Relations" << endl;
+    cout << setw(51) << "Relations" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(5) << "ID" << setw(15) << "Programmer" << setw(48) << "Computer" <<endl;
+    cout << setw(7) << "ID" << setw(15) << "Programmer" << setw(48) << "Computer" <<endl;
     cout << "   ======================================================================================" << endl;
 }
 
 void Interface::writeOutPersonVector(vector<person> pers) {
     for (size_t i = 0 ; i < pers.size() ; i++) {
         cout << "   " << setw(pers[i].returnName().length()) << pers[i].returnName() <<
-                setw(12 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
-                setw(8) << pers[i].returnBirthYear()  <<
-                setw(10) << pers[i].returnDeathYear() << endl;
+                setw(21 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
+                setw(16) << pers[i].returnBirthYear()  <<
+                setw(20) << pers[i].returnDeathYear() << endl;
     }
 }
 
 void Interface::writeOutPersonVectorId(vector<person> pers) {
     for (size_t i = 0 ; i < pers.size() ; i++) {
-        cout << "   " << pers[i].returnId() << "  " <<
+        cout << setw(7) << pers[i].returnId() << "    " <<
                 setw(pers[i].returnName().length()) << pers[i].returnName() <<
-                setw(12 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
-                setw(8) << pers[i].returnBirthYear()  <<
-                setw(10) << pers[i].returnDeathYear() << endl;
+                setw(15 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
+                setw(16) << pers[i].returnBirthYear()  <<
+                setw(20) << pers[i].returnDeathYear() << endl;
     }
 }
 
@@ -393,28 +429,28 @@ void Interface::writeOutComVector(vector<computer> computer) {
     for (size_t i = 0 ; i < computer.size() ; i++) {
         cout << "   " << setw(computer[i].returnComName().length())
              << computer[i].returnComName()
-             << setw(15 +(25 - computer[i].returnComName().length()))
-             << computer[i].returnComType() << setw(9)
-             << computer[i].returnComYear() << setw(10)
+             << setw(24 +(25 - computer[i].returnComName().length()))
+             << computer[i].returnComType() << setw(15)
+             << computer[i].returnComYear() << setw(20)
              << computer[i].returnComBuilt() << endl;
     }
 }
 
 void Interface::writeOutComVectorId(vector<computer> computer) {
     for (size_t i = 0 ; i < computer.size() ; i++) {
-        cout << "   " << computer[i].returnId() << "  "
+        cout << setw(7) << computer[i].returnId() << "    "
              << setw(computer[i].returnComName().length())
              << computer[i].returnComName()
-             << setw(15 +(25 - computer[i].returnComName().length()))
-             << computer[i].returnComType() << setw(9)
-             << computer[i].returnComYear() << setw(10)
+             << setw(17 +(25 - computer[i].returnComName().length()))
+             << computer[i].returnComType() << setw(16)
+             << computer[i].returnComYear() << setw(18)
              << computer[i].returnComBuilt() << endl;
     }
 }
 
 void Interface::writeOutRelations(vector<relations> relation) {
     for (size_t i = 0 ; i < relation.size() ; i++) {
-        cout << "   " << relation[i].returnRid()
+        cout << setw(7) << relation[i].returnRid()
              << setw(5 + relation[i].returnCname().length())
              << relation[i].returnCname()
              << setw(25 +(25 - relation[i].returnCname().length()) + (relation[i].returnPname().length()))
@@ -459,6 +495,7 @@ char Interface::inputSwitch() {
             addRelations();
             break;
         case '4':
+            system("CLS");
             return '4';
             break;
         default:
@@ -505,6 +542,7 @@ char Interface::viewSwitch() {
             return '3';
             break;
         case '4':
+            system("CLS");
             return '4';
             break;
         default:
@@ -550,6 +588,7 @@ char Interface::deleteSwitch() {
             return '3';
             break;
         case '4':
+            system("CLS");
             return '4';
             break;
             default:
@@ -591,6 +630,7 @@ char Interface::searchSwitch() {
             return '2';
             break;
         case '3':
+            system("CLS");
             return '3';
             break;
         default:
@@ -605,9 +645,10 @@ void Interface::addRelations() {
     vector<person> per = manager.asInserted();
     vector<computer> com = manager.computerAsInserted();
 
-    databaseHeader();
+    idDatabaseHeader();
     writeOutPersonVectorId(per);
     int pid = choosePerson();
+    idcDatabaseHeader();
     writeOutComVectorId(com);
     int cid = chooseComputer();
 
@@ -616,14 +657,16 @@ void Interface::addRelations() {
 
 int Interface::choosePerson() {
     int pid;
-    cout << "\n   Enter the ID of a Computer Scientist to add: ";
+    cout << endl;
+    cout << setw(50) << "Enter the ID of a Computer Scientist to add: ";
     cin >> pid;
     return pid;
 }
 
 int Interface::chooseComputer() {
     int cid;
-    cout << "\n   Enter the ID of a computer to add: ";
+    cout << endl;
+    cout << setw(40) << "Enter the ID of a computer to add: ";
     cin >> cid;
     return cid;
 }

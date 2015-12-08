@@ -9,6 +9,7 @@
 #include <cstring>
 #include <iomanip>
 #include <locale>
+#include <stdlib.h>
 #include "person.h"
 #include "computer.h"
 #include "relations.h"
@@ -59,7 +60,7 @@ private:
     computer com;
     relations rel;
     QSqlDatabase db;
-    const QString DB_LOCATION = "C:\\Users\\Hrafnhildur\\Documents\\Skólinn\\Verklegt namskeid 1\\Vika2\\skil2\\programmers2.sqlite";
+    const QString DB_LOCATION = "C:\\Users\\hivSteini\\Desktop\\Verklegt1\\Verklegt-namskeid-1\\Skil2\\programmers2.sqlite";
 };
 
 #endif // DATABASE_H

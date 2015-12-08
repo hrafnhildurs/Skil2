@@ -41,6 +41,8 @@ private:
     char searchSwitch();
     void cDatabaseHeader();
     void cSearchHeader();
+    void idDatabaseHeader();
+    void idcDatabaseHeader();
     void relationsHeader();
     void relation();
     void addRelations();
