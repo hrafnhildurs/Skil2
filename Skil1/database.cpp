@@ -204,10 +204,10 @@ vector<relations> Database::writeOutComAndPersonVector(QSqlQuery query) {
     vector<relations> tmp;
     while (query.next())
     {
-       rel.addToRelations(query.value(1).toInt(),
-                          query.value(2).toString().toStdString(),
-                          query.value(3).toInt(),
-                          query.value(4).toString().toStdString());
+       rel.addToRelations(query.value(0).toInt(),
+                          query.value(1).toString().toStdString(),
+                          query.value(2).toInt(),
+                          query.value(3).toString().toStdString());
 
         tmp.push_back(rel);
     }
