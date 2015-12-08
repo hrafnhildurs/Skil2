@@ -350,7 +350,7 @@ void Interface::relationsHeader()
     cout << setw(40) << "Relations" << endl;
     cout << "   --------------------------------------------------------------------------------------" << endl;
     cout << "\n";
-    cout << setw(10) << "Computer" << setw(31) << "Programmer" <<endl;
+    cout << setw(10) << "ID" << setw(10) << "Computer" << setw(22) << "ID" << setw(15) << "Programmer" <<endl;
     cout << "   ======================================================================================" << endl;
 }
 void Interface::writeOutPersonVector(vector<person> pers) {
@@ -374,10 +374,11 @@ void Interface::writeOutComVector(vector<computer> computer) {
 }
 void Interface::writeOutComAndPersonVector(vector<relations> relation) {
     for (size_t i = 0 ; i < relation.size() ; i++) {
-        cout << "   " << setw(relation[i].returnCname().length())
-             << relation[i].returnCname()
+        cout << setw(9) << relation[i].returnCid()
              << setw(15 + (25 - relation[i].returnCname().length()))
-             << relation[i].returnPname() << setw(9)
+             << relation[i].returnCname() << setw(9)
+             << relation[i].returnPid() << setw(9)
+             << relation[i].returnPname()
              << endl;
     }
 }
