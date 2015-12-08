@@ -17,6 +17,10 @@ void Manager::addComputer(string cn, int cy, string ct, string cb) {
 void Manager::addRelations(int pid, int cid) {
     db.addRelations(pid, cid);
 }
+void Manager::addNamesRelations(string p, string c) {
+    db.addNamesRelations(p, c);
+}
+
 
 // Prints the list ordered by time inserted
 vector<person> Manager::asInserted() {

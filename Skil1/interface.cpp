@@ -304,7 +304,7 @@ void Interface::deleteComputer() {
 void Interface::relation() {
     vector<relations> tmp = manager.relation();
     relationsHeader();
-    writeOutComAndPersonVector(tmp);
+    writeOutComAndPersonVector2(tmp);
 }
 
 // Prints out the database header when list is displayed
@@ -403,7 +403,7 @@ void Interface::writeOutComVectorId(vector<computer> computer) {
     }
 }
 
-void Interface::writeOutComAndPersonVector(vector<relations> relation) {
+void Interface::writeOutComAndPersonVector2(vector<relations> relation) {
     for (size_t i = 0 ; i < relation.size() ; i++) {
         cout << "   " << setw(relation[i].returnPname().length())
              << relation[i].returnPname()

@@ -21,6 +21,7 @@ public:
     int returnPid();
 
     void addToRelations(int cid, int pid);
+    void addNamesToRelations(string c, string p);
 
 };
 
