@@ -9,6 +9,7 @@ using namespace std;
 class person
 {
 protected:
+    int id;
     string name;
     string sex;
     int birth_year;
@@ -18,11 +19,12 @@ public:
     person(string& n, string& s, int& b, int& d);
     person(string& n, string& s, int& b);
 
+    int returnId();
     string returnName();
     string returnSex();
     int returnBirthYear();
     int returnDeathYear();
-    void addToPerson(string n, string s, int b, int d);
+    void addToPerson(int id, string n, string s, int b, int d);
 
     friend istream &operator >> (istream& ins, person& a);
 };

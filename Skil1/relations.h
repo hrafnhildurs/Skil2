@@ -14,14 +14,13 @@ protected:
     int rpid;
 public:
     relations();
-    relations(int &cid, string &p, int pid, string &c);
+    relations(int &cid, int &pid);
     string returnPname();
     string returnCname();
     int returnCid();
     int returnPid();
 
-    friend istream &operator >> (istream& ins, relations& a);
-    void addToRelations(int cid, string c, int pid, string p);
+    void addToRelations(int cid, int pid);
 
 };
 

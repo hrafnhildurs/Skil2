@@ -22,7 +22,7 @@ public:
     void addPersonAlive(string n, string s, int b);
     void addPersonDead(string n, string s, int b, int d);
     void addComputer(string cn, int cy, string ct, string cb);
-    void addRelations(string c, string p);
+    void addRelations(int pid, int cid);
     bool connectionOk();
 
     vector<person> pSortAsInserted();
@@ -31,6 +31,7 @@ public:
     vector<person> pSortByBirthYear();
     vector<person> search(string searchWord);
 
+    vector<computer> cAsInserted();
     vector<computer> cSortAsc();
     vector<computer> cSortDesc();
     vector<computer> cSortYear();
@@ -54,7 +55,7 @@ private:
     computer com;
     relations rel;
     QSqlDatabase db;
-    const QString DB_LOCATION = "C:\\Users\\hivSteini\\Desktop\\github\\Skil2\\programmers2.sqlite";
+    const QString DB_LOCATION = "C:\\Users\\Einir\\Documents\\GitHub\\Skil2\\programmers2.sqlite";
 };
 
 #endif // DATABASE_H

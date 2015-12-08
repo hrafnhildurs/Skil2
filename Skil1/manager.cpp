@@ -14,8 +14,8 @@ void Manager::addPersonDead(string n, string s, int b, int d) {
 void Manager::addComputer(string cn, int cy, string ct, string cb) {
     db.addComputer(cn, cy, ct, cb);
 }
-void Manager::addToRelations(string c, string p) {
-    db.addRelations(c, p);
+void Manager::addRelations(int pid, int cid) {
+    db.addRelations(pid, cid);
 }
 
 // Prints the list ordered by time inserted
@@ -49,6 +49,10 @@ void Manager::deleteName(string name){
 // Delete computer from database
 void Manager::deleteComputer(string name){
     db.deleteComputer(name);
+}
+
+vector<computer> Manager::computerAsInserted() {
+    return db.cAsInserted();
 }
 
 vector<computer> Manager::computerSortAsc() {

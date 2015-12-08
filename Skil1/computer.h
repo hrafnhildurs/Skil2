@@ -9,6 +9,7 @@ using namespace std;
 class computer
 {
 protected:
+    int id;
     string cname;
     int cyear;
     string ctype;
@@ -17,13 +18,14 @@ protected:
 public:
     computer();
     computer(string& cn, int& cy, string& ct, string& cb);
+    int returnId();
     string returnComName();
     int returnComYear();
     string returnComType();
     string returnComBuilt();
 
     friend istream &operator >> (istream& ins, computer& b);
-    void addToComputer(string cn, int cy, string ct, string cb);
+    void addToComputer(int id, string cn, int cy, string ct, string cb);
 };
 
 #endif // COMPUTER

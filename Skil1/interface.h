@@ -23,6 +23,7 @@ private:
     void searchComp();
     void deletePerson();
     void deleteComputer();
+    void computerAsInserted();
     void computerSortAsc();
     void computerSortDesc();
     void computerSortYear();
@@ -41,9 +42,14 @@ private:
     void cSearchHeader();
     void relationsHeader();
     void relation();
+    void addRelations();
     void writeOutPersonVector(vector<person> person);
+    void writeOutPersonVectorId(vector<person>);
     void writeOutComVector(vector<computer> computer);
+    void writeOutComVectorId(vector<computer>);
     void writeOutComAndPersonVector(vector<relations> relation);
+    int choosePerson();
+    int chooseComputer();
 };
 
 #endif // INTERFACE_H

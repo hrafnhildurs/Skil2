@@ -18,12 +18,13 @@ public:
     vector<person> search(string searchWord);
 
     void addComputer(string cn, int cy, string ct, string cb);
+    vector<computer> computerAsInserted();
     vector<computer> computerSortAsc();
     vector<computer> computerSortDesc();
     vector<computer> computerSortYear();
     vector<computer> searchComp(string searchWord);
 
-    void addToRelations(string c, string p);
+    void addRelations(int pid, int cid);
     vector<relations> relation();
 
 private:

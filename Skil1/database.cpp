@@ -56,22 +56,20 @@ void Database::addComputer(string cn, int cy, string ct, string cb) {
     query.addBindValue(cbuilt);
     query.exec();
 }
-void Database::addRelations(string c, string p) {
-    QString cname(c.c_str());
-    QString pname(p.c_str());
-
+void Database::addRelations(int pid, int cid) {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO pAndc VALUES(?, ?)");
-    query.addBindValue(cname);
-    query.addBindValue(pname);
+    query.prepare("INSERT INTO relation VALUES(?, ?)");
+    query.addBindValue(cid);
+    query.addBindValue(pid);
     query.exec();
 }
 vector<person> Database::writeToVector(QSqlQuery query) {
     vector<person> tmp;
     while (query.next())
     {
-        pers.addToPerson(query.value(1).toString().toStdString(),
+        pers.addToPerson(query.value(0).toInt(),
+                         query.value(1).toString().toStdString(),
                          query.value(2).toString().toStdString(),
                          query.value(3).toInt(),
                          query.value(4).toInt());
@@ -168,6 +166,11 @@ void Database::deleteComputer(string name, bool db_ok) {
     }
 }
 
+vector<computer> Database::cAsInserted() {
+    QSqlQuery query("SELECT * FROM computers");
+    return writeComToVector(query);
+}
+
 vector<computer> Database::cSortAsc() {
     QSqlQuery query("SELECT * FROM computers ORDER BY name ASC");
     return writeComToVector(query);
@@ -182,8 +185,9 @@ vector<computer> Database::cSortYear() {
     QSqlQuery query("SELECT * FROM computers ORDER BY year ASC");
     return writeComToVector(query);
 }
+
 vector<relations> Database::relation() {
-    QSqlQuery query("SELECT * FROM relation");
+    QSqlQuery query("SELECT c.name, p.name FROM relation AS pac JOIN computers AS c ON c.id = pac.computers_id JOIN programmers AS p ON p.id = pac.programmers_id");
     return writeOutComAndPersonVector(query);
 }
 
@@ -191,23 +195,23 @@ vector<computer> Database::writeComToVector(QSqlQuery query) {
     vector<computer> tmp;
     while (query.next())
     {
-        com.addToComputer(query.value(1).toString().toStdString(),
-                         query.value(2).toInt(),
-                         query.value(3).toString().toStdString(),
-                         query.value(4).toString().toStdString());
+        com.addToComputer(query.value(0).toInt(),
+                          query.value(1).toString().toStdString(),
+                          query.value(2).toInt(),
+                          query.value(3).toString().toStdString(),
+                          query.value(4).toString().toStdString());
 
         tmp.push_back(com);
     }
     return tmp;
 }
+
 vector<relations> Database::writeOutComAndPersonVector(QSqlQuery query) {
     vector<relations> tmp;
     while (query.next())
     {
        rel.addToRelations(query.value(0).toInt(),
-                          query.value(1).toString().toStdString(),
-                          query.value(2).toInt(),
-                          query.value(3).toString().toStdString());
+                          query.value(1).toInt());
 
         tmp.push_back(rel);
     }

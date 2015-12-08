@@ -198,6 +198,13 @@ void Interface::asInserted() {
     databaseHeader();
     writeOutPersonVector(tmp);
 }
+
+void Interface::computerAsInserted() {
+    vector<computer> tmp = manager.computerAsInserted();
+    cDatabaseHeader();
+    writeOutComVector(tmp);
+}
+
 void Interface::computerSortAsc() {
     vector<computer> tmp = manager.computerSortAsc();
     cDatabaseHeader();
@@ -353,9 +360,20 @@ void Interface::relationsHeader()
     cout << setw(13) << "Programmer" << setw(53) << "Computer" <<endl;
     cout << "   ======================================================================================" << endl;
 }
+
 void Interface::writeOutPersonVector(vector<person> pers) {
     for (size_t i = 0 ; i < pers.size() ; i++) {
         cout << "   " << setw(pers[i].returnName().length()) << pers[i].returnName() <<
+                setw(12 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
+                setw(8) << pers[i].returnBirthYear()  <<
+                setw(10) << pers[i].returnDeathYear() << endl;
+    }
+}
+
+void Interface::writeOutPersonVectorId(vector<person> pers) {
+    for (size_t i = 0 ; i < pers.size() ; i++) {
+        cout << "   " << pers[i].returnId() << "  " <<
+                setw(pers[i].returnName().length()) << pers[i].returnName() <<
                 setw(12 + (25 - pers[i].returnName().length())) << pers[i].returnSex() <<
                 setw(8) << pers[i].returnBirthYear()  <<
                 setw(10) << pers[i].returnDeathYear() << endl;
@@ -372,6 +390,19 @@ void Interface::writeOutComVector(vector<computer> computer) {
              << computer[i].returnComBuilt() << endl;
     }
 }
+
+void Interface::writeOutComVectorId(vector<computer> computer) {
+    for (size_t i = 0 ; i < computer.size() ; i++) {
+        cout << "   " << computer[i].returnId() << "  "
+             << setw(computer[i].returnComName().length())
+             << computer[i].returnComName()
+             << setw(15 +(25 - computer[i].returnComName().length()))
+             << computer[i].returnComType() << setw(9)
+             << computer[i].returnComYear() << setw(10)
+             << computer[i].returnComBuilt() << endl;
+    }
+}
+
 void Interface::writeOutComAndPersonVector(vector<relations> relation) {
     for (size_t i = 0 ; i < relation.size() ; i++) {
         cout << "   " << setw(relation[i].returnPname().length())
@@ -381,6 +412,7 @@ void Interface::writeOutComAndPersonVector(vector<relations> relation) {
              << endl;
     }
 }
+
 void Interface::inputMenu() {
     char number = 0;
     do
@@ -390,12 +422,13 @@ void Interface::inputMenu() {
         cout << "   ======================================================================================" << endl;
         cout << setw(53) << "1.  Input new person" << endl;
         cout << setw(55) << "2.  Input new computer" << endl;
-        cout << setw(53) << "3.  Exit input menu " << endl;
+        cout << setw(55) << "3.  Input new relation" << endl;
+        cout << setw(53) << "4.  Exit input menu " << endl;
         cout << "   ======================================================================================" << endl;
         cout << "\n";
         cout << setw(55) << "Enter your selection: ";
         number = inputSwitch();
-    }while(number != '3');
+    }while(number != '4');
     cout << "\n\n";
 }
 char Interface::inputSwitch() {
@@ -413,13 +446,17 @@ char Interface::inputSwitch() {
             return '2';
             break;
         case '3':
-            return '3';
+            addRelations();
+            break;
+        case '4':
+            return '4';
             break;
         default:
             cout << "   Invalid input.";
             return '0';
             break;
         }
+    return '0';
 }
 void Interface::viewMenu() {
     char number = 0;
@@ -546,4 +583,32 @@ char Interface::searchSwitch() {
             return '0';
             break;
         }
+}
+
+
+void Interface::addRelations() {
+    vector<person> per = manager.asInserted();
+    vector<computer> com = manager.computerAsInserted();
+
+    databaseHeader();
+    writeOutPersonVectorId(per);
+    int pid = choosePerson();
+    writeOutComVectorId(com);
+    int cid = chooseComputer();
+
+    manager.addRelations(pid, cid);
+}
+
+int Interface::choosePerson() {
+    int pid;
+    cout << "\n   Enter the ID of a Computer Scientist to add: ";
+    cin >> pid;
+    return pid;
+}
+
+int Interface::chooseComputer() {
+    int cid;
+    cout << "\n   Enter the ID of a computer to add: ";
+    cin >> cid;
+    return cid;
 }
