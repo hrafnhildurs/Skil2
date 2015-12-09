@@ -6,14 +6,14 @@
 
 using namespace std;
 
-computer::computer()
-{
+computer::computer() {
     id = 0;
    cname = "";
    cyear = 0;
    ctype = "";
    cbuilt = "";
 }
+
 computer::computer(string& cn, int& cy, string& ct, string& cb){
     cname = cn;
     cyear = cy;

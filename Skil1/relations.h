@@ -1,18 +1,15 @@
 #ifndef RELATIONS_H
 #define RELATIONS_H
 #include <string>
-#include <fstream>
-#include <iostream>
 using namespace std;
 
+/* Class that handles relations between a computer scientist
+ * and a computer in a seperate table in the database, containing
+ * the IDs of each computer scientist and computer that are joined
+ * together.
+*/
 class relations
 {
-protected:
-    string rcname;
-    string rpname;
-    int rcid;
-    int rpid;
-    int rid;
 public:
     relations();
     relations(int &cid, int &pid);
@@ -24,7 +21,12 @@ public:
 
     void addToRelations(int cid, int pid);
     void addNamesToRelations(int id, string c, string p);
-
+private:
+    string rcname;
+    string rpname;
+    int rcid;
+    int rpid;
+    int rid;
 };
 
 #endif // RELATIONS_H

@@ -1,31 +1,34 @@
 #ifndef COMPUTER
 #define COMPUTER
 #include <string>
-#include <fstream>
-#include <iostream>
 using namespace std;
 
+/* Class that handles everything that has to do with each computers
+ * inserted into the databse.
+*/
 
 class computer
 {
-protected:
-    int id;
-    string cname;
-    int cyear;
-    string ctype;
-    string cbuilt;
-
 public:
+    // Constructors
     computer();
     computer(string& cn, int& cy, string& ct, string& cb);
+
+    // Helper functions to return private variable values
     int returnId();
     string returnComName();
     int returnComYear();
     string returnComType();
     string returnComBuilt();
 
-    friend istream &operator >> (istream& ins, computer& b);
+    // Helper function for relations
     void addToComputer(int id, string cn, int cy, string ct, string cb);
+private:
+    int id;
+    string cname;
+    int cyear;
+    string ctype;
+    string cbuilt;
 };
 
 #endif // COMPUTER

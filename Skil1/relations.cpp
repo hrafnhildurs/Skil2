@@ -1,13 +1,8 @@
 #include "relations.h"
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <QtSql>
 
 using namespace std;
 
-relations::relations ()
-{
+relations::relations () {
     rcid = 0;
     rcname = "";
     rpid = 0;

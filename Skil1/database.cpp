@@ -56,6 +56,7 @@ void Database::addComputer(string cn, int cy, string ct, string cb) {
     query.addBindValue(cbuilt);
     query.exec();
 }
+
 void Database::addRelations(int pid, int cid) {
     QSqlQuery query;
 
@@ -64,6 +65,7 @@ void Database::addRelations(int pid, int cid) {
     query.addBindValue(pid);
     query.exec();
 }
+
 void Database::addNamesRelations(int id, string p, string c) {
     QSqlQuery query;
     QString pname(p.c_str());
@@ -75,10 +77,10 @@ void Database::addNamesRelations(int id, string p, string c) {
     query.addBindValue(cname);
     query.exec();
 }
+
 vector<person> Database::writeToVector(QSqlQuery query) {
     vector<person> tmp;
-    while (query.next())
-    {
+    while (query.next()) {
         pers.addToPerson(query.value(0).toInt(),
                          query.value(1).toString().toStdString(),
                          query.value(2).toString().toStdString(),
@@ -129,8 +131,7 @@ vector<person> Database::search(string searchWord) {
     return writeToVector(query);
 }
 
-vector<computer> Database::searchComp(string searchWord)
-{
+vector<computer> Database::searchComp(string searchWord) {
     QSqlQuery query;
     QString search(searchWord.c_str());
     locale loc;
@@ -169,6 +170,7 @@ void Database::deleteName(string name, bool db_ok) {
         query.exec();
     }
 }
+
 void Database::deleteComputer(string name, bool db_ok) {
     if(db_ok) {
         QString nameToDel(name.c_str());
@@ -179,9 +181,9 @@ void Database::deleteComputer(string name, bool db_ok) {
         query.exec();
     }
 }
+
 void Database::deleteRelation(int id, bool db_ok) {
     if(db_ok) {
-
         QSqlQuery query;
         query.prepare("DELETE FROM relation WHERE id = ?");
         query.addBindValue(id);
@@ -216,8 +218,7 @@ vector<relations> Database::relation() {
 
 vector<computer> Database::writeComToVector(QSqlQuery query) {
     vector<computer> tmp;
-    while (query.next())
-    {
+    while (query.next()) {
         com.addToComputer(query.value(0).toInt(),
                           query.value(1).toString().toStdString(),
                           query.value(2).toInt(),
@@ -240,6 +241,7 @@ vector<relations> Database::writeOutComAndPersonVector(QSqlQuery query) {
     }
     return tmp;
 }
+
 vector<relations> Database::writeOutRelations(QSqlQuery query) {
     vector<relations> tmp;
     while (query.next())
